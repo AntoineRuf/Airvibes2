@@ -9,7 +9,12 @@ namespace Airvibes2
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.rating.pack.js",
+                        "~/Scripts/jquery.MetaData.js",
+                        "~/Scripts/jquery.rating.js",
+                        "~/Scripts/jquery.form.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,7 +30,8 @@ namespace Airvibes2
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/jquery.rating.css"));
         }
     }
 }

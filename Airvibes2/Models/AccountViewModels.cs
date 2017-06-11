@@ -6,8 +6,24 @@ namespace Airvibes2.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        public string Nom { get; set; }
+        [Required]
+        public string Prénom { get; set; }
+        [Required]
+        [Timestamp]
+        public System.DateTime DateNaissance { get; set; }
+        [Required]
+        public string Adresse { get; set; }
+        [Required]
+        [Phone]
+        public string NumeroTelephone { get; set; }
+        [Required]
+        public string Ville { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -64,6 +80,23 @@ namespace Airvibes2.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        public string Nom { get; set; }
+        [Required]
+        public string Prénom { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date de naissance")]
+        public System.DateTime DateNaissance { get; set; }
+        [Required]
+        public string Adresse { get; set; }
+        [Required]
+        [Phone]
+        public string NumeroTelephone { get; set; }
+        [Required]
+        public string Ville { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

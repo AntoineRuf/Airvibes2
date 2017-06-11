@@ -1,0 +1,157 @@
+﻿@model IEnumerable<Airvibes2.Models.CommentaireChansons>
+
+<script type="text/javascript">
+    function AddComment(Id)
+    {
+        var comment =
+        {
+            Users_Id: null,
+            Songs_Id: Id,
+            Body: $('#Body').val(),
+            PostedAt: null
+        };
+
+        $.ajax
+        ({
+            url: '/SComments/Add',
+            type: 'post',
+            data: comment,           
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    function DeleteComment(id, trackId)
+    {
+        var commentToDelete =
+        {
+            Id : id,
+            Users_Id : null,
+            Songs_Id : trackId,
+            Body : null,
+            PostedAt : null,
+        };
+        $.ajax
+        ({
+            url: '/SComments/Delete',
+            type: 'post',
+            data: commentToDelete
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function SendMark(Id, IdArtist, IdRecord, mark)
+    {
+        var song =
+            {
+                Id: Id,
+                Artists_Id: IdArtist,
+                Records_Id: IdRecord,
+                Title: null,
+                Duration: null,
+                TimesPlayed: null,
+                FilePath: null,
+                Mark: mark,
+                NbrMarks: null
+            };
+        $.ajax
+        ({
+            url: '/Songs/Rate',
+            type: 'post',
+            data: song
+        });
+    }
+</script>
+<h2>Infos sur :</h2>
+<h5>@ViewBag.Title</h5>
+
+<body>
+    <section class="infos">
+        <div id="infos" class="cover">
+            <img src="~/Media/Covers/@ViewBag.Cover"/>
+        </div>
+        <div class="description">
+           <a href="/Artists/Index/@ViewBag.ArtistId">
+                <h3 class="Artist">@ViewBag.Artist</h3>
+           </a>
+           <h4 class="Genre">@ViewBag.Genre</h4>
+           <h5 class="Date de sortie">@ViewBag.ReleaseDate</h5>
+        </div>
+    </section>
+
+    <table class="table table-striped">
+        <tr>
+            <th>
+            </th>
+            <th>
+                Sample
+            </th>
+            <th>
+                Note
+            </th>
+            <th>
+                Afficher Commentaires
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Songs.Title)
+                </td>
+                <td>
+                    <audio src="~/Media/Music/@ViewBag.Artist/@item.Songs.FilePath" controls></audio>
+                </td>
+                <td class="rater">
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,5)"></label>
+                        <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,4.5)"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,4)"></label>
+                        <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,3.5)"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,3)"></label>
+                        <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,2.5)"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,2)"></label>
+                        <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,1.5)"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,1)"></label>
+                        <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars" onclick="SendMark(@item.Songs.Id,@item.Songs.Artists_Id,@item.Songs.Records_Id,0.5)"></label>
+                    </fieldset>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <img class="Comments" src="~/Icons/commentplus.png" onclick="$('.'+ @item.Songs.Id).slideToggle('fast');" />
+                </td>
+            </tr>
+
+            <tr class="@item.Songs.Id" style="display:none">
+                <td colspan="4">
+                    <form name="Nouveau Commentaire" method="post">
+                        <input type="text" style="display:inline-block" class="form-control" id="Body" placeholder="Nouveau Commentaire"/>
+                        <button type="button" class="btn btn-primary btn-primary" onclick="AddComment(@item.Songs.Id);">Poster</button>
+                    </form>
+                </td>
+            </tr>
+            foreach (var item2 in item.SComment)
+            {
+                <tr class="@item.Songs.Id" style="display:none">
+                    <td colspan="4">
+                        <section class="ContenuCom">
+                            <div class="InfoCom">
+                                <h6 style="display:inline-block">Ecrit le <small>@item2.PostedAt</small> par <small>@item2.User.UserName</small></h6>
+                                @if (@item2.User.UserName == User.Identity.Name)
+                                {
+                                    <button style="display:inline-block" type="button" class="btn btn-primary btn-primary" onclick="DeleteComment(@item2.Id,@item2.Songs_Id);">Supprimer</button>
+                                }
+                            </div>
+                            <div>
+                                <p class="bg-info">@item2.Body</p>
+                            </div>
+                        </section>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</body>

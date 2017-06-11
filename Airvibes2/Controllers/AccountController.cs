@@ -151,7 +151,16 @@ namespace Airvibes2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Nom = model.Nom,
+                    Prénom = model.Prénom,
+                    Ville = model.Ville,
+                    Adresse = model.Adresse,
+                    NumeroTelephone = model.NumeroTelephone,
+                    DateNaissance = model.DateNaissance
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

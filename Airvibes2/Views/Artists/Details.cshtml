@@ -1,0 +1,29 @@
+﻿@model Airvibes2.Models.Artists
+
+
+<h2>Infos sur :</h2>
+<h1>@ViewBag.Name</h1>
+
+<body>
+    <section class="infos">
+        <div id="infos" class="cover">
+            <img src="~/Media/Artists/@ViewBag.Photo" />
+        </div>
+        <div class="description">
+            <h3>Biographie :</h3>
+            <h4 class="bio">@ViewBag.Bio</h4>
+        </div>
+    </section>
+
+    <h1>Albums :</h1>
+    @foreach (var item in Model.Records)
+    {
+        <div class="cover" style="display:inline-block">
+            <a href="/Records/Details/@item.Id">
+                <img src="~/Media/Covers/@item.Cover" width="300" height="300" />
+                <h4 align="center">@item.Title</h4>
+            </a>           
+        </div>
+    }
+
+</body>

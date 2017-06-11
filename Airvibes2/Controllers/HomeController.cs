@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Airvibes2.Models;
 
 namespace Airvibes2.Controllers
 {
@@ -27,5 +28,6 @@ namespace Airvibes2.Controllers
 
             return View();
         }
+        
     }
 }

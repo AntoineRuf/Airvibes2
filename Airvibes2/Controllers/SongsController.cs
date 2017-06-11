@@ -12,116 +12,27 @@ namespace Airvibes2.Controllers
 {
     public class SongsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext context = new ApplicationDbContext();
 
         // GET: Songs
         public ActionResult Index()
         {
-            return View(db.Songs.ToList());
+            return View(context.Songs.ToList());
         }
 
-        // GET: Songs/Details/5
-        public ActionResult Details(int? id)
+        [HttpPost]
+        public ActionResult Rate(Songs song)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Songs songs = db.Songs.Find(id);
-            if (songs == null)
-            {
-                return HttpNotFound();
-            }
-            return View(songs);
-        }
+            Songs newSong = context.Songs.Where(s => s.Id == song.Id).FirstOrDefault();
+            song.Mark = (newSong.Mark * newSong.NbrMarks + song.Mark) / (newSong.NbrMarks + 1);
+            newSong.NbrMarks++;
+            context.Entry(newSong).State = EntityState.Modified;
+            context.SaveChanges();
 
-        // GET: Songs/Create
-        public ActionResult Create()
-        {
+            int Records_Id = context.Songs.Where(s => s.Id == song.Id).First().Records_Id;
+            RedirectToAction("Details", "Records", Records_Id);
+
             return View();
-        }
-
-        // POST: Songs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Id_Artist,Id_Record,Title,Duration,TimesPlayed,Rating,LowQFile,HiQFile")] Songs songs)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Songs.Add(songs);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(songs);
-        }
-
-        // GET: Songs/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Songs songs = db.Songs.Find(id);
-            if (songs == null)
-            {
-                return HttpNotFound();
-            }
-            return View(songs);
-        }
-
-        // POST: Songs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Id_Artist,Id_Record,Title,Duration,TimesPlayed,Rating,LowQFile,HiQFile")] Songs songs)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(songs).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(songs);
-        }
-
-        // GET: Songs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Songs songs = db.Songs.Find(id);
-            if (songs == null)
-            {
-                return HttpNotFound();
-            }
-            return View(songs);
-        }
-
-        // POST: Songs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Songs songs = db.Songs.Find(id);
-            db.Songs.Remove(songs);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
