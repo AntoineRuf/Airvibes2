@@ -1,4 +1,5 @@
 ﻿using Airvibes2.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,39 @@ namespace Airvibes2.Controllers
             db.ShoppingCart.Remove(cartitemToDelete);
             db.SaveChanges();
             Response.Redirect(Request.RawUrl);
-            return View();
+            return Redirect("Index");
+        }
+
+        [HttpPost]
+        public ActionResult ValidateCart()
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser userToModify = db.Users.First(a => a.Id == userId);
+            foreach(var item in db.ShoppingCart)
+            {
+                if(userToModify != null)
+                {
+                    if(userToModify.OwnedSongs == null)
+                    {
+                        userToModify.OwnedSongs = new List<int>();
+                        userToModify.OwnedSongs.Add(item.SongsId);
+                        userToModify.ownedSongs.Add(db.Songs.First(s => s.Id == item.SongsId));
+                        db.ShoppingCart.Remove(item);
+                    }
+                    else if (!userToModify.ownedSongs.Contains(db.Songs.First(s => s.Id == item.SongsId)))
+                    {
+                        userToModify.OwnedSongs.Add(item.SongsId);
+                        userToModify.ownedSongs.Add(db.Songs.First(s => s.Id == item.SongsId));
+                        db.ShoppingCart.Remove(item);
+                    }
+                    else
+                    {
+                        db.ShoppingCart.Remove(item);
+                    }
+                }                
+            }
+            db.SaveChanges();
+            return Redirect("Index");            
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Airvibes2.Models
 {
@@ -15,8 +17,7 @@ namespace Airvibes2.Models
         [Required]
         public string Prénom { get; set; }
         [Required]
-        [Timestamp]
-        public System.DateTime DateNaissance { get; set; }
+        public DateTime DateNaissance { get; set; }
         [Required]
         public string Adresse { get; set; }
         [Required]
@@ -24,6 +25,10 @@ namespace Airvibes2.Models
         public string NumeroTelephone { get; set; }
         [Required]
         public string Ville { get; set; }
+
+        [ForeignKey("Songs")]
+        public List<int> OwnedSongs { get; set; }
+        public virtual ICollection<Songs> Songs {get;set; }
     }
 
     public class ExternalLoginListViewModel

@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Airvibes2.Models
 {
@@ -29,6 +30,10 @@ namespace Airvibes2.Models
         
         public virtual List<SComment> SComment { get; set; }
 
+        [ForeignKey("Songs")]
+        public List<int> OwnedSongs { get; set; }
+        public virtual ICollection<Songs> ownedSongs { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -49,6 +54,10 @@ namespace Airvibes2.Models
         public DbSet<Songs> Songs { get; set; }
         public DbSet<SComment> SComment { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCart { get; set; }
+
+
+        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

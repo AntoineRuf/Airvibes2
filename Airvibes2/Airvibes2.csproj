@@ -231,6 +231,14 @@
     <Compile Include="Migrations\201706130940103_ADdForeignKey.Designer.cs">
       <DependentUpon>201706130940103_ADdForeignKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706131519583_ADdingSongListToUser.cs" />
+    <Compile Include="Migrations\201706131519583_ADdingSongListToUser.Designer.cs">
+      <DependentUpon>201706131519583_ADdingSongListToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706131537425_UserModification.cs" />
+    <Compile Include="Migrations\201706131537425_UserModification.Designer.cs">
+      <DependentUpon>201706131537425_UserModification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Artists.cs" />
@@ -350,6 +358,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706130940103_ADdForeignKey.resx">
       <DependentUpon>201706130940103_ADdForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131519583_ADdingSongListToUser.resx">
+      <DependentUpon>201706131519583_ADdingSongListToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131537425_UserModification.resx">
+      <DependentUpon>201706131537425_UserModification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

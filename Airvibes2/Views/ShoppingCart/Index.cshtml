@@ -51,3 +51,10 @@
             </td>
         </tr>
     }
+</table>
+<div>
+    @using (Html.BeginForm("ValidateCart", "ShoppingCart"))
+    {
+        <input type="submit" value="Valider les achats" />
+    }
+</div>
