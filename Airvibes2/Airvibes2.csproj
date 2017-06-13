@@ -205,6 +205,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RecordsController.cs" />
     <Compile Include="Controllers\SCommentsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -303,6 +304,10 @@
     <Content Include="Views\Records\Index.cshtml" />
     <Content Include="Views\Artists\Details.cshtml" />
     <Content Include="Views\Artists\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\RecordsResult.cshtml" />
+    <Content Include="Views\Search\ArtistsResult.cshtml" />
+    <Content Include="Views\Search\SongsResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

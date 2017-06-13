@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Index</h2>
+
+<p>
+    @using (Html.BeginForm())
+    {
+    <p>
+        Critere de recherche : <select name="criteria">
+            <option value="Artiste">Artiste</option>
+            <option value="Album">Album</option>
+            <option value="Titre">Titre</option>
+</select>
+        @Html.TextBox("SearchString")
+        <input type="submit" value="Recherche" />
+    </p>
+    }
+    <div>
+        Cherchez le nom d'un artiste, d'un album, d'une musique... Et nous verrons si nous pouvons le trouver dans notre base de donnees.
+    </div>
+</p>

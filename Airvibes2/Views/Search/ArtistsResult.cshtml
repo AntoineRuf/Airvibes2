@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Airvibes2.Models.Artists>
+
+
+@foreach (var item in Model)
+{
+    <div data-ArtistsId=@item.Id class="cover" style="display: inline-block">
+        <a href="/Artists/Details/@item.Id">
+            <img src="~/Media/Artists/@item.Photo" width="300" height="300" />
+            <h4>@item.Name</h4>
+        </a>
+    </div>
+}
