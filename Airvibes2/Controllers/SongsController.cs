@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Airvibes2.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Airvibes2.Controllers
 {
@@ -32,6 +33,32 @@ namespace Airvibes2.Controllers
             int Records_Id = context.Songs.Where(s => s.Id == song.Id).First().Records_Id;
             RedirectToAction("Details", "Records", Records_Id);
 
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddItemToCart(ShoppingCartItem cartitem)
+        {
+            string userid = User.Identity.GetUserId();
+            List<ShoppingCartItem> cart = new List<ShoppingCartItem>();
+            cart = context.ShoppingCart.Where(a => a.SongsId == cartitem.SongsId).ToList();
+            if (cart.Count == 0)
+            {
+                if (context.ShoppingCart.Count() != 0)
+                {
+                    cartitem.Id = context.ShoppingCart.Count() + 1;
+                    cartitem.MemberId = userid;
+                    context.ShoppingCart.Add(cartitem);
+                }
+                else
+                {
+                    cartitem.Id = 1;
+                    cartitem.MemberId = userid;
+                    context.ShoppingCart.Add(cartitem);
+                }
+                context.SaveChanges();
+            }            
+            RedirectToAction("Details", "Records", context.Songs.Where(s => s.Id == cartitem.SongsId).First().Records_Id);
             return View();
         }
     }

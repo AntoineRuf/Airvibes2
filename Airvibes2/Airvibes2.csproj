@@ -206,6 +206,7 @@
     <Compile Include="Controllers\RecordsController.cs" />
     <Compile Include="Controllers\SCommentsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -222,6 +223,14 @@
     <Compile Include="Migrations\201605250104211_Niktamere1.Designer.cs">
       <DependentUpon>201605250104211_Niktamere1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706130813246_AddingShoppingCart.cs" />
+    <Compile Include="Migrations\201706130813246_AddingShoppingCart.Designer.cs">
+      <DependentUpon>201706130813246_AddingShoppingCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706130940103_ADdForeignKey.cs" />
+    <Compile Include="Migrations\201706130940103_ADdForeignKey.Designer.cs">
+      <DependentUpon>201706130940103_ADdForeignKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Artists.cs" />
@@ -231,6 +240,7 @@
     <Compile Include="Models\Records.cs" />
     <Compile Include="Models\SComment.cs" />
     <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\ShoppingCartItem.cs" />
     <Compile Include="Models\Songs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -309,6 +319,7 @@
     <Content Include="Views\Search\ArtistsResult.cshtml" />
     <Content Include="Views\Search\SongsResult.cshtml" />
     <Content Include="Views\Search\SearchResults.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -333,6 +344,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605250104211_Niktamere1.resx">
       <DependentUpon>201605250104211_Niktamere1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706130813246_AddingShoppingCart.resx">
+      <DependentUpon>201706130813246_AddingShoppingCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706130940103_ADdForeignKey.resx">
+      <DependentUpon>201706130940103_ADdForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

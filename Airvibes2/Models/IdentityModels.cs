@@ -48,6 +48,7 @@ namespace Airvibes2.Models
         public DbSet<Records> Records { get; set; }
         public DbSet<Songs> Songs { get; set; }
         public DbSet<SComment> SComment { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCart { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

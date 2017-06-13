@@ -63,6 +63,23 @@
         });
     }
 </script>
+<script type="text/javascript">
+    function SendCartItem(SongId) 
+    {
+        var CartItem =
+            {
+                Id: null,
+                SongsId: SongId,
+                MemberId: null
+            };
+        $.ajax
+        ({
+            url: '/Songs/AddItemToCart',
+            type: 'post',
+            data: CartItem,           
+        });
+    }
+</script>
 <h2>Infos sur :</h2>
 <h5>@ViewBag.Title</h5>
 
@@ -89,6 +106,8 @@
             </th>
             <th>
                 Note
+            </th>
+            <th>
             </th>
             <th>
                 Afficher Commentaires
@@ -119,6 +138,7 @@
                     </fieldset>
                 </td>
                 <td>
+                    <input type="button" value="Buy" onclick="SendCartItem(@item.Songs.Id)" />
                 </td>
                 <td>
                     <img class="Comments" src="~/Icons/commentplus.png" onclick="$('.'+ @item.Songs.Id).slideToggle('fast');" />

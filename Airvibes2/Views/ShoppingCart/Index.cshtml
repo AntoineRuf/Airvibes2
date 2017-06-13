@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Airvibes2.Models.ShoppingCartItem>
+<script type="text/javascript">
+    function DeleteCartItem(SongId)
+    {
+        var CartItem =
+            {
+                Id: null,
+                SongsId: SongId,
+                MemberId: null
+            };
+        $.ajax
+        ({
+            url: '/ShoppingCart/DeleteItemFromCart',
+            type: 'post',
+            data: CartItem,
+        });
+    }
+</script>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cart Content</h2>
+<table class="table table-striped">
+    <tr>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Songs.Title)
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+                <input type="button" value="cancel" onclick="DeleteCartItem(@item.Songs.Id)" />
+            </td>
+        </tr>
+    }
