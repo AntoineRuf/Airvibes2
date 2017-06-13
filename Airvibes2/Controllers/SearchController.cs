@@ -11,37 +11,20 @@ namespace Airvibes2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Search
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-        public ActionResult Index(string searchString)
+        [HttpPost]
+        public ActionResult Search(string searchString)
         {
             var context = new ApplicationDbContext();
-            string searchCriteria = Request.Form["criteria"];
-            if (searchString != null)
-            {
-                if(searchCriteria == "Artiste")
-                {
-                    List<Artists> artists = db.Artists.Where(s => s.Name.Contains(searchString)).ToList();
-                    return PartialView("ArtistsResult", artists);
-                }
-                else if(searchCriteria == "Album")
-                {
-                    Records records = (Records)db.Records.Where(s => s.Title.Contains(searchString));
-                    return PartialView("RecordsResult",records);
-                }
-                else if(searchCriteria == "Titre")
-                {
-                    Songs songs = (Songs)db.Songs.Where(s => s.Title.Contains(searchString));
-                    return PartialView("SongsResult",songs);
-                }
-                else
-                {
-                    return View();
-                }
-            }
-            else
-            {
-                return View();
-            }
+            SearchModel res = new SearchModel();
+            res.Artists = db.Artists.Where(a => a.Name.ToLower().Contains(searchString.ToLower())).ToList();
+            res.Records = db.Records.Where(a => a.Title.ToLower().Contains(searchString.ToLower())).ToList();
+            res.Songs = db.Songs.Where(a => a.Title.ToLower().Contains(searchString.ToLower())).ToList();
+            return View("SearchResults");
         }
     }
 }
