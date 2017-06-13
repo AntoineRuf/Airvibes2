@@ -30,8 +30,8 @@
                     <li>
                         @using (Html.BeginForm("SearchResult", "Search"))
                         {
-                            @Html.TextBox("searchString")
-                            <input type="submit" value="search" />
+                            @Html.TextBox("searchString", null , new { @style = " -webkit-border-radius: 5px; - moz - border - radius: 5px; border - radius: 5px; background-color : #cccccc; height: 31px; margin-top : 9px; margin-left : 20px; font-size : 15px" })
+                                        <input type="submit" value="Search" style="-webkit-border-radius: 5px; - moz - border - radius: 5px; border - radius: 5px; background-color : #cccccc; height: 31px;font-size : 15px"/>
                         }
                     </li>
                 </ul>
