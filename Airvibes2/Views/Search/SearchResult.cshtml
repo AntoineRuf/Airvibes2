@@ -1,0 +1,13 @@
+﻿@model Airvibes2.Models.SearchModel
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Results</h2>
+<h3>Artists</h3>
+<div>@Html.Partial("ArtistsResult", Model.Artists)</div>
+<h3>Albums</h3>
+<div>@Html.Partial("RecordsResult", Model.Records)</div>
+<h3>Songs</h3>
+<div>@Html.Partial("SongsResult", Model.Songs)</div>
