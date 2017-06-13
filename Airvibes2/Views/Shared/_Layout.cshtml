@@ -27,7 +27,13 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Artistes", "Index", "Artists")</li>
                     <li>@Html.ActionLink("Albums", "Index", "Records")</li>
-                    <li>@Html.ActionLink("Search", "Index", "Search")</li>
+                    <li>
+                        @using (Html.BeginForm("SearchResult", "Search"))
+                        {
+                            @Html.TextBox("searchString")
+                            <input type="submit" value="search" />
+                        }
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

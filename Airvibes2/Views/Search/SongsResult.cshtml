@@ -1,1 +1,18 @@
-﻿
+﻿@model IEnumerable<Airvibes2.Models.Songs>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Nom
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <a href="/Records/Details/@item.Records_Id">
+                <h5>@item.Title</h5>
+            </a>
+        </tr>
+        
+    }
+</table>
